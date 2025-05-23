@@ -22,4 +22,11 @@ def load_math_dataset():
     sData_y = simple_dataset["G_avg"]
     sData_X = pd.get_dummies(sData_X, drop_first=False)  # one-hot encode categorical features
 
-    return cData_X, cData_y, sData_X, sData_y
+    # Split X and y for the mlp model
+    mlp_features = ['Medu', 'failures', 'studytime', 'goout', 'age', 'schoolsup', 'internet']
+    mlp_dataset = complex_dataset[mlp_features + ['G_avg']]
+    mlpData_X = mlp_dataset.drop("G_avg", axis=1)
+    mlpData_Y = mlp_dataset["G_avg"]
+    mlpData_X = pd.get_dummies(mlpData_X, drop_first=False)  # one-hot encode categorical features
+
+    return cData_X, cData_y, sData_X, sData_y, mlpData_X, mlpData_Y
