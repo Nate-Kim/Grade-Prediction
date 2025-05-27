@@ -18,3 +18,23 @@
 input, select {
   margin-right: 10px;
 }
+
+.prediction {
+  padding: 1rem;
+}
+
+.prediction-container {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.prediction-box {
+  flex: 1;
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}

@@ -502,9 +502,9 @@ export default function Home() {
 
       <div className="prediction">
         <h2>Prediction</h2>
-        <div style={{ marginTop: "1.5rem" }}>
-          <div style={{ marginBottom: "1rem" }}>
-            Output 1:{" "}
+        <div className="prediction-container">
+          <div className="prediction-box">
+            <h3>Model 1</h3>
             {loading.model1 ? (
               <ClipLoader size={20} color="#ff8a00" />
             ) : (
@@ -512,8 +512,8 @@ export default function Home() {
             )}
           </div>
 
-          <div style={{ marginBottom: "1rem" }}>
-            Output 2:{" "}
+          <div className="prediction-box">
+            <h3>Model 2</h3>
             {loading.model2 ? (
               <ClipLoader size={20} color="#ff8a00" />
             ) : (
@@ -521,8 +521,8 @@ export default function Home() {
             )}
           </div>
 
-          <div style={{ marginBottom: "1rem" }}>
-            Output 3:{" "}
+          <div className="prediction-box">
+            <h3>Model 3</h3>
             {loading.model3 ? (
               <ClipLoader size={20} color="#ff8a00" />
             ) : (
