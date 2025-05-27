@@ -10,8 +10,8 @@ export default function Header() {
         <span className="logo-text">Grade Predictor</span>
       </div>
       <nav className="nav-buttons">
-      <Link className="nav-button" to="/">HOME</Link>
-      <Link className="nav-button" to="/about">ABOUT</Link>
+      <Link className="nav-button" to="/">Home</Link>
+      <Link className="nav-button" to="/about">About</Link>
       </nav>
     </header>
   );
