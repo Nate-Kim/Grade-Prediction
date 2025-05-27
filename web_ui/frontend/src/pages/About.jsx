@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <div style={{ padding: '1rem' }}>
-      <h1>About Page</h1>
+      <h1>About The Project</h1>
       <p>
         This is a frontend for a grade predictor. Built by students as a project for ECS 171.
       </p>

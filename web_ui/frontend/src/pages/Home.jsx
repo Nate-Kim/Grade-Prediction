@@ -232,7 +232,6 @@ export default function Home() {
 
   return (
     <div style={{ padding: "1rem" }}>
-      <h1>Home Page</h1>
       <p>Predict a student's grade based on the following parameters:</p>
 
       School: <Tooltip tooltipText="Identifies the student's school" />

@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
+import './Header.css';
 
 export default function Header() {
   return (
-    <header style={{ padding: '1rem', background: '#f0f0f0' }}>
-      <button style={{ marginRight: '1rem' }}>
-        <Link to="/">Home</Link>
-      </button>
-      <button>
-        <Link to="/about">About</Link>
-      </button>
+    <header className='header'>
+      <Link className="nav-button" to="/">HOME</Link>
+      <Link className="nav-button" to="/about">ABOUT</Link>
     </header>
   );
 }
