@@ -1,5 +1,22 @@
-input, select {
-  margin-right: 10px;
+.container {
+  display: flex;
+  flex-direction: row; /* Default layout: side by side */
+  gap: 20px; /* Optional, adjusts the gap between input and output */
+  padding: 20px;
+}
+
+.parameters,
+.prediction {
+  flex: 1; /* This will make the divs take equal space */
+  padding: 20px;
+  
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack them vertically on small screens */
+  }
 }
 
 .prediction {
@@ -20,4 +37,20 @@ input, select {
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fafafa;
+}
+
+.button {
+  margin-top: 1rem;
+  background-color: #007BFF;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #004D99;
 }
