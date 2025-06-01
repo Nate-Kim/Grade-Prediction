@@ -236,7 +236,7 @@ export default function Home() {
       <div className="hook">
         <center>
           <h1>Grades made predictable!</h1>
-          <p>Enter key student metrics to see predicted final grades using three different machine learning models. Powered by real data from 399 students.</p>
+          <p>Enter key student metrics to see predicted final grades using different machine learning models. <br />Powered by real data from 399 students.</p>
         </center>
       </div>
 
