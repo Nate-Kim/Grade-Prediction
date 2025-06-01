@@ -5,7 +5,7 @@ export default function Dropdown({ label, info, selected, onChange, options }) {
   return (
     <div style={{ marginBottom: '1rem' }}>
       <label style={{ marginRight: '1rem' }}>{label}
-        <Tooltip tooltipText={info} />
+        <Tooltip text={info} />
         <select value={selected} onChange={(e) => onChange(e.target.value)}>
           {options.map((opt) => (
             <option key={opt.value} value={opt.value}>

@@ -27,7 +27,7 @@ function Slider({ label, info, value, setValue, min = 0, max = 100 }) {
   return (
     <div style={{ marginBottom: '1rem' }}>
       <label style={{ marginRight: '1rem'}}>{label}
-      <Tooltip tooltipText={info} />
+      <Tooltip text={info} />
         <input
           type="range"
           min={min}
