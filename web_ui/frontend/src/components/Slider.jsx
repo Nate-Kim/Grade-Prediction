@@ -1,4 +1,6 @@
-function SliderWithInput({ label, value, setValue, min = 0, max = 100 }) {
+import Tooltip from '../components/Tooltip';
+
+function Slider({ label, info, value, setValue, min = 0, max = 100 }) {
   const handleSliderChange = (e) => {
     setValue(Number(e.target.value));
   };
@@ -23,8 +25,8 @@ function SliderWithInput({ label, value, setValue, min = 0, max = 100 }) {
 
   return (
     <div style={{ marginBottom: '1rem' }}>
-      <label>
-        {label}
+      <label style={{ marginRight: '1rem'}}>{label}
+      <Tooltip tooltipText={info} />
         <input
           type="range"
           min={min}
@@ -47,4 +49,4 @@ function SliderWithInput({ label, value, setValue, min = 0, max = 100 }) {
   );
 }
 
-export default SliderWithInput;
+export default Slider;
