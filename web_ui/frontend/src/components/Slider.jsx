@@ -1,4 +1,5 @@
 import Tooltip from '../components/Tooltip';
+import './Slider.css';
 
 function Slider({ label, info, value, setValue, min = 0, max = 100 }) {
   const handleSliderChange = (e) => {
@@ -34,6 +35,9 @@ function Slider({ label, info, value, setValue, min = 0, max = 100 }) {
           value={value === '' ? min : value}
           onChange={handleSliderChange}
           className="custom-slider"
+          style={{
+            background: `linear-gradient(to right, #004D99 0%, #007BFF ${(value - min) / (max - min) * 100}%, #ccc ${(value - min) / (max - min) * 100}%, #ccc 100%)`
+          }}
         />
         <input
           type="number"
