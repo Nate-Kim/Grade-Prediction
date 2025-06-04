@@ -116,7 +116,7 @@ export default function Home() {
 
         <div className="prediction">
 
-          <center><h2>Prediction</h2></center>
+          <center><h2>Average Grade Prediction</h2></center>
           <div className="prediction-container">
             <div className="prediction-box">
               <h3>Polynomial Regression</h3>
@@ -147,7 +147,7 @@ export default function Home() {
             </div>
 
             <div className="prediction-box">
-              <h3>MLP</h3>
+              <h3>Multilayer Perceptron</h3>
               {loading.mlp ? (
                 <ClipLoader size={20} color="#ff8a00" />
               ) : typeof results.mlp === "number" ? (

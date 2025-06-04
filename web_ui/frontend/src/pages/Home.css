@@ -13,9 +13,16 @@
 }
 
 /* Media query for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .container {
     flex-direction: column; /* Stack them vertically on small screens */
+  }
+}
+
+@media (max-width: 900px) {
+  .prediction-container {
+    flex-direction: column; /* Stack them vertically on small screens */
+    align-items: center;
   }
 }
 
@@ -39,6 +46,12 @@
   background-color: #fafafa;
 }
 
+.prediction-box h3 {
+  height: 3em;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
 .button {
   margin-top: 1rem;
   background-color: #007BFF;
@@ -60,7 +73,7 @@
 } 
 
 .result-success {
-  font-size: 2em;
+  font-size: 3em;
   font-weight: bold;
 }
 
