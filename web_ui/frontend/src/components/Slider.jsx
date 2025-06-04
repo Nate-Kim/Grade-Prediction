@@ -25,9 +25,13 @@ function Slider({ label, info, value, setValue, min = 0, max = 100 }) {
   };
 
   return (
-    <div style={{ marginBottom: '1rem' }}>
-      <label style={{ marginRight: '1rem'}}>{label}
-      <Tooltip text={info} />
+    <div className="slider-group">
+      <div className="slider-label">
+        <label>{label}</label>
+        <Tooltip text={info} />
+      </div>
+
+      <div className="slider-controls">
         <input
           type="range"
           min={min}
@@ -48,7 +52,7 @@ function Slider({ label, info, value, setValue, min = 0, max = 100 }) {
           onBlur={handleInputBlur}
           style={{ width: '3ch' }}
         />
-      </label>
+      </div>
     </div>
   );
 }
