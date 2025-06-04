@@ -8,7 +8,7 @@ export default function About() {
 
       <h2>Dataset</h2>
       <p>
-        The <a target="_blank" rel="noopener noreferrer" href="https://www.kaggle.com/datasets/adilshamim8/math-students">Math Students Dataset</a>, sourced from the UCI Machine Learning Repository, provides a comprehensive overview of student performance in a math program, incorporating both academic and socio-demographic information. It includes key attributes such as student demographics (age, sex, family size), parental background (education, occupation), and lifestyle factors (internet access, health, socializing). Academic performance is captured through grades (G1, G2, G3), with G3 being the final grade and the target variable for predictive analysis. The dataset also includes behavioral and school-related data, such as study time, failures, and extracurricular involvement.
+        The <a target="_blank" rel="noopener noreferrer" href="https://www.kaggle.com/datasets/adilshamim8/math-students">Math Students Dataset</a>, sourced from the UCI Machine Learning Repository, provides a comprehensive overview of student performance in a math program, incorporating both academic and socio-demographic information. It includes key attributes such as student demographics (age, sex, family size), parental background (education, occupation), and lifestyle factors (internet access, health, socializing). Academic performance is captured through grades (G1, G2, G3), the average of all 3 being the target variable for predictive analysis. The dataset includes a mix of behavioral and school-related data, such as study time, failures, and extracurricular involvement.
       </p>
 
       <h2>EDA</h2>
