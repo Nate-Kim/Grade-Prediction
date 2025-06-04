@@ -1,5 +1,6 @@
 # ML stuff
 import pandas as pd
+import pickle
 
 # Server stuff
 from fastapi import FastAPI#, Request, HTTPException
@@ -8,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, conint
 from collections import defaultdict
 import time
-import pickle
+from fastapi import HTTPException
 
 # Validate input
 class InputParams(BaseModel):
@@ -56,36 +57,43 @@ def check_rate_limit(ip: str) -> bool:
     return True
 
 ##################################################
+polyreg_loaderr = None
+rforest_loaderr = None
+mlp_loaderr = None
 # Load models here
+
+# Polynomial Regression
 try:
-    # Polynomial Regression
     with open("models/polynomial_regression.pkl", "rb") as f:
         polyreg_bundle = pickle.load(f)
-
     polyreg = polyreg_bundle["model"]
     polyreg_feat = polyreg_bundle["poly_features"]
+except Exception as e:
+    polyreg_loaderr = str(e)
 
-    # Random Forest
+# Random Forest
+try:
     with open("models/random_forest.pkl", "rb") as f:
         rforest = pickle.load(f)
     with open("models/random_forest_columns.pkl", "rb") as f:
         rforest_col = pickle.load(f)
+except Exception as e:
+    rforest_loaderr = str(e)
 
-    # MLP
+# MLP
+try:
     with open("models/mlp.pkl", "rb") as f:
         mlp = pickle.load(f)
-
-except FileNotFoundError:
-    #TODO change this, add error handling
-    # Dummy for now 
-    polyreg = lambda x: [sum(x[0])]
-    rforest = lambda x: [max(x[0])]
-    mlp = lambda x: [min(x[0])]
+except Exception as e:
+    mlp_loaderr = str(e)
 
 ##################################################
 # POSTs
 @app.post("/predict/polyreg")
 async def predict_polyreg(inputs: InputParams):
+    if polyreg_loaderr:
+        raise HTTPException(status_code=503, detail=f"Model not available")
+
     data = pd.DataFrame([inputs.model_dump()])
 
     poly_data = polyreg_feat.transform(data)
@@ -95,6 +103,9 @@ async def predict_polyreg(inputs: InputParams):
 
 @app.post("/predict/rforest")
 async def predict_rforest(inputs: InputParams):
+    if rforest_loaderr:
+        raise HTTPException(status_code=503, detail=f"Model not available")
+    
     data = pd.DataFrame([inputs.model_dump()])
 
     # One-hot encode, align cols
@@ -107,6 +118,9 @@ async def predict_rforest(inputs: InputParams):
 
 @app.post("/predict/mlp")
 async def predict_mlp(inputs: InputParams):
+    if mlp_loaderr:
+        raise HTTPException(status_code=503, detail=f"Model not available")
+
     data = pd.DataFrame([inputs.model_dump()])
 
     result = round(mlp.predict(data)[0], 2)

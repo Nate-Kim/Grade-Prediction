@@ -68,19 +68,23 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(inputs),
       })
-        .then((res) => res.json())
-        .then((data) => {
-          setResults((prev) => ({ ...prev, [model]: data.result }));
-        })
-        .catch((err) => {
-          console.error(err);
-          setResults((prev) => ({ ...prev, [model]: "Error" }));
-        })
-        .finally(() => {
-          setLoading((prev) => ({ ...prev, [model]: false }));
-        });
-    });
-  };
+        .then(async (res) => {
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.detail || "Server error");
+        }
+        const data = await res.json();
+        setResults((prev) => ({ ...prev, [model]: data.result }));
+      })
+      .catch((err) => {
+        console.error(`Error in ${model}:`, err.message);
+        setResults((prev) => ({ ...prev, [model]: `Error: ${err.message}` }));
+      })
+      .finally(() => {
+        setLoading((prev) => ({ ...prev, [model]: false }));
+      });
+  });
+};
 
   return (
     <div style={{ padding: "1rem" }}>
