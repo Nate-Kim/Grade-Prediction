@@ -1,3 +1,7 @@
+# ML stuff
+import pandas as pd
+
+# Server stuff
 from fastapi import FastAPI#, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 #from fastapi.responses import JSONResponse
@@ -8,9 +12,14 @@ import pickle
 
 # Validate input
 class InputParams(BaseModel):
-    param1: conint(ge=0, le=100)
-    param2: conint(ge=0, le=100)
-    param3: conint(ge=0, le=100)
+    failures: conint(ge=0, le=3)
+    absences: conint(ge=0, le=93)
+    goout: conint(ge=0, le=5)
+    age: conint(ge=15, le=22)
+    health: conint(ge=1, le=5)
+    freetime: conint(ge=1, le=5)
+    studytime: conint(ge=1, le=10)
+    Medu: conint(ge=0, le=4)
 
 app = FastAPI()
 
@@ -51,7 +60,10 @@ def check_rate_limit(ip: str) -> bool:
 try:
     # Polynomial Regression
     with open("models/polynomial_regression.pkl", "rb") as f:
-        polyreg = pickle.load(f)
+        polyreg_bundle = pickle.load(f)
+
+    polyreg = polyreg_bundle["model"]
+    polyreg_feat = polyreg_bundle["poly_features"]
 
     # Random Forest
     with open("models/random_forest.pkl", "rb") as f:
@@ -74,18 +86,29 @@ except FileNotFoundError:
 # POSTs
 @app.post("/predict/polyreg")
 async def predict_polyreg(inputs: InputParams):
-    input_data = [[inputs.param1, inputs.param2, inputs.param3]]
-    result = polyreg(input_data)[0]
+    data = pd.DataFrame([inputs.model_dump()])
+
+    poly_data = polyreg_feat.transform(data)
+    result = polyreg.predict(poly_data)
+
     return {"model": "polyreg", "result": result}
 
 @app.post("/predict/rforest")
 async def predict_rforest(inputs: InputParams):
-    input_data = [[inputs.param1, inputs.param2, inputs.param3]]
-    result = rforest(input_data)[0]
+    data = pd.DataFrame([inputs.model_dump()])
+
+    # One-hot encode, align cols
+    rf_encoded = pd.get_dummies(data, drop_first=True)
+    rf_encoded = rf_encoded.reindex(columns=rforest_col, fill_value=0)
+
+    result = rforest.predict(rf_encoded)
+
     return {"model": "rforest", "result": result}
 
 @app.post("/predict/mlp")
 async def predict_mlp(inputs: InputParams):
-    input_data = [[inputs.param1, inputs.param2, inputs.param3]]
-    result = mlp(input_data)[0]
+    data = pd.DataFrame([inputs.model_dump()])
+
+    result = mlp.predict(data)
+
     return {"model": "mlp", "result": result}
