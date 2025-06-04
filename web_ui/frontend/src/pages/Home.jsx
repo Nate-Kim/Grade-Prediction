@@ -200,16 +200,16 @@ export default function Home() {
   const [loading, setLoading] = useState({});
 
   const modelEndpoints = {
-    model1: "predict/model1",
-    model2: "predict/model2",
-    model3: "predict/model3",
+    polyreg: "predict/polyreg",
+    rforest: "predict/rforest",
+    mlp: "predict/mlp",
   };
 
   const handleSubmit = () => {
     const inputs = { param1: p_school, param2: p_sex, param3: p_age, };
 
     setResults({});
-    setLoading({ model1: true, model2: true, model3: true });
+    setLoading({ polyreg: true, rforest: true, mlp: true });
 
     Object.entries(modelEndpoints).forEach(([model, url]) => {
       fetch(url, {
@@ -285,29 +285,29 @@ export default function Home() {
 
           <div className="prediction-container">
             <div className="prediction-box">
-              <h3>Model 1</h3>
-              {loading.model1 ? (
+              <h3>Polynomial Regression</h3>
+              {loading.polyreg ? (
                 <ClipLoader size={20} color="#ff8a00" />
               ) : (
-                <span>{results.model1}</span>
+                <span>{results.polyreg}</span>
               )}
             </div>
 
             <div className="prediction-box">
-              <h3>Model 2</h3>
-              {loading.model2 ? (
+              <h3>Random Forest</h3>
+              {loading.rforest ? (
                 <ClipLoader size={20} color="#ff8a00" />
               ) : (
-                <span>{results.model2}</span>
+                <span>{results.rforest}</span>
               )}
             </div>
 
             <div className="prediction-box">
-              <h3>Model 3</h3>
-              {loading.model3 ? (
+              <h3>MLP</h3>
+              {loading.mlp ? (
                 <ClipLoader size={20} color="#ff8a00" />
               ) : (
-                <span>{results.model3}</span>
+                <span>{results.mlp}</span>
               )}
             </div>
           </div>

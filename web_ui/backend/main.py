@@ -49,35 +49,43 @@ def check_rate_limit(ip: str) -> bool:
 ##################################################
 # Load models here
 try:
-    with open("model1.pkl", "rb") as f:
-        model1 = pickle.load(f)
-    with open("model2.pkl", "rb") as f:
-        model2 = pickle.load(f)
-    with open("model3.pkl", "rb") as f:
-        model3 = pickle.load(f)
+    # Polynomial Regression
+    with open("models/polynomial_regression.pkl", "rb") as f:
+        polyreg = pickle.load(f)
+
+    # Random Forest
+    with open("models/random_forest.pkl", "rb") as f:
+        rforest = pickle.load(f)
+    with open("models/random_forest_columns.pkl", "rb") as f:
+        rforest_col = pickle.load(f)
+
+    # MLP
+    with open("models/mlp.pkl", "rb") as f:
+        mlp = pickle.load(f)
+
 except FileNotFoundError:
     #TODO change this, add error handling
     # Dummy for now 
-    model1 = lambda x: [sum(x[0])]
-    model2 = lambda x: [max(x[0])]
-    model3 = lambda x: [min(x[0])]
+    polyreg = lambda x: [sum(x[0])]
+    rforest = lambda x: [max(x[0])]
+    mlp = lambda x: [min(x[0])]
 
 ##################################################
 # POSTs
-@app.post("/predict/model1")
-async def predict_model1(inputs: InputParams):
+@app.post("/predict/polyreg")
+async def predict_polyreg(inputs: InputParams):
     input_data = [[inputs.param1, inputs.param2, inputs.param3]]
-    result = model1(input_data)[0]
-    return {"model": "model1", "result": result}
+    result = polyreg(input_data)[0]
+    return {"model": "polyreg", "result": result}
 
-@app.post("/predict/model2")
-async def predict_model2(inputs: InputParams):
+@app.post("/predict/rforest")
+async def predict_rforest(inputs: InputParams):
     input_data = [[inputs.param1, inputs.param2, inputs.param3]]
-    result = model2(input_data)[0]
-    return {"model": "model2", "result": result}
+    result = rforest(input_data)[0]
+    return {"model": "rforest", "result": result}
 
-@app.post("/predict/model3")
-async def predict_model3(inputs: InputParams):
+@app.post("/predict/mlp")
+async def predict_mlp(inputs: InputParams):
     input_data = [[inputs.param1, inputs.param2, inputs.param3]]
-    result = model3(input_data)[0]
-    return {"model": "model3", "result": result}
+    result = mlp(input_data)[0]
+    return {"model": "mlp", "result": result}
