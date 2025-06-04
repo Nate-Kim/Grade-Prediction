@@ -89,7 +89,7 @@ async def predict_polyreg(inputs: InputParams):
     data = pd.DataFrame([inputs.model_dump()])
 
     poly_data = polyreg_feat.transform(data)
-    result = polyreg.predict(poly_data)
+    result = round(polyreg.predict(poly_data)[0], 2)
 
     return {"model": "polyreg", "result": result}
 
@@ -101,7 +101,7 @@ async def predict_rforest(inputs: InputParams):
     rf_encoded = pd.get_dummies(data, drop_first=True)
     rf_encoded = rf_encoded.reindex(columns=rforest_col, fill_value=0)
 
-    result = rforest.predict(rf_encoded)
+    result = round(rforest.predict(rf_encoded)[0], 2)
 
     return {"model": "rforest", "result": result}
 
@@ -109,6 +109,6 @@ async def predict_rforest(inputs: InputParams):
 async def predict_mlp(inputs: InputParams):
     data = pd.DataFrame([inputs.model_dump()])
 
-    result = mlp.predict(data)
+    result = round(mlp.predict(data)[0], 2)
 
     return {"model": "mlp", "result": result}
