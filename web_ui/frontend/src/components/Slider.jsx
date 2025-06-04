@@ -46,7 +46,7 @@ function Slider({ label, info, value, setValue, min = 0, max = 100 }) {
           value={value}
           onChange={handleInputChange}
           onBlur={handleInputBlur}
-          style={{ width: '60px', marginLeft: '10px' }}
+          style={{ width: '3ch' }}
         />
       </label>
     </div>

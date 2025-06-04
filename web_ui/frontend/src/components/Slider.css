@@ -43,3 +43,25 @@
   border-color: transparent;
   color: transparent;
 }
+
+input[type="number"] {
+  padding: 6px 8px;
+  font-size: 0.9rem;
+  border: 1px solid #007BFF;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: #F9F9F9;
+  color: #333333;
+}
+
+input[type="number"]:focus {
+  border-color: #004D99;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
