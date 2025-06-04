@@ -106,21 +106,29 @@ export default function Home() {
           <Slider label="Free Time After School:" info="How much free time the student has after school, where 5 is a lot" value={p_freetime} setValue={setPFreetime} min={1} max={5} />
           <Slider label="Weekly Study Time:" info="Average time spent by the student studying per week, in hours" value={p_studytime} setValue={setPStudytime} min={1} max={10} />
           <Dropdown label="Mother's Education:" info="Highest level of education achieved by the student's mother" selected={p_Medu} onChange={setPMedu} options={cat_Medu} />
+
+          <center>
+            <button className='button' onClick={handleSubmit} style={{ marginTop: "1rem" }}>Predict</button>
+            <br /><br />
+            <div className="fine-print">From all of the available parameters, these 8 were chosen as the most important</div>
+          </center>
         </div>
 
         <div className="prediction">
-          <center>
-            <h2>Prediction</h2>
-            <button className='button' onClick={handleSubmit} style={{ marginTop: "1rem" }}>Submit Parameters</button>
-          </center>
 
+          <center><h2>Prediction</h2></center>
           <div className="prediction-container">
             <div className="prediction-box">
               <h3>Polynomial Regression</h3>
               {loading.polyreg ? (
                 <ClipLoader size={20} color="#ff8a00" />
+              ) : typeof results.polyreg === "number" ? (
+                <>
+                  <span className="result-success">{results.polyreg}</span>
+                  <span> / 20</span>
+                </>
               ) : (
-                <span>{results.polyreg}</span>
+                <span className="result-error">{results.polyreg}</span>
               )}
             </div>
 
@@ -128,8 +136,13 @@ export default function Home() {
               <h3>Random Forest</h3>
               {loading.rforest ? (
                 <ClipLoader size={20} color="#ff8a00" />
+              ) : typeof results.rforest === "number" ? (
+                <>
+                  <span className="result-success">{results.rforest}</span>
+                  <span> / 20</span>
+                </>
               ) : (
-                <span>{results.rforest}</span>
+                <span className="result-error">{results.rforest}</span>
               )}
             </div>
 
@@ -137,11 +150,18 @@ export default function Home() {
               <h3>MLP</h3>
               {loading.mlp ? (
                 <ClipLoader size={20} color="#ff8a00" />
+              ) : typeof results.mlp === "number" ? (
+                <>
+                  <span className="result-success">{results.mlp}</span>
+                  <span> / 20</span>
+                </>
               ) : (
-                <span>{results.mlp}</span>
+                <span className="result-error">{results.mlp}</span>
               )}
             </div>
           </div>
+          <br />
+          <center><div className="fine-print">The average grade across each trimester (G1, G2, G3)</div></center>
         </div>
       </div>
     </div>

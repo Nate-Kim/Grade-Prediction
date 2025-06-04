@@ -54,3 +54,17 @@
 .button:hover {
   background-color: #004D99;
 }
+
+.fine-print {
+  font-size: 60%;
+} 
+
+.result-success {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.result-error {
+  color: red;
+  font-style: italic;
+}
